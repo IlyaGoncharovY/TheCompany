@@ -1,9 +1,9 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-import {companies, CompanyType} from '../../../common';
+import {companies, InitialCompanyTypes} from '../../../common';
 
 interface initialStateType {
-  companies: CompanyType[];
+  companies: InitialCompanyTypes[];
 }
 
 const initialState: initialStateType = {
@@ -14,8 +14,14 @@ const CompanyReducer = createSlice({
   name: 'CompanyReducer',
   initialState,
   reducers: {
+    changeStatusCompany: (state, action: PayloadAction<string>) => {
+      state.companies = state.companies.map((company) =>
+        company.id === action.payload
+          ? { ...company, isChecked: !company.isChecked } : company,
+      );
+    },
   },
 });
-export const {} = CompanyReducer.actions;
+export const {changeStatusCompany} = CompanyReducer.actions;
 
 export default CompanyReducer.reducer;

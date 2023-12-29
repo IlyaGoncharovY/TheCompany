@@ -1,7 +1,7 @@
 import {useAppSelector} from '../../store/hook.ts';
 
-import {HeaderCompany} from './components/tableHeader/HeaderCompany.tsx';
 import {CompaniesItem} from './item/CompaniesItem.tsx';
+import {HeaderCompany} from './components/tableHeader/HeaderCompany.tsx';
 
 export const CompanyContainer = () => {
 
