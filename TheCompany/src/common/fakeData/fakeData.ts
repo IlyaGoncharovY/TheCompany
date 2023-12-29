@@ -1,28 +1,41 @@
 import {v1} from 'uuid';
 
-export type WorkerType = { [companyId: string]: { id: string; secondName: string; name: string; post: string }[] };
+export type CurrWorkerType = {
+  id: string;
+  secondName: string;
+  name: string;
+  post: string;
+  isEdit: boolean;
+}
+
+export type WorkerType = {
+  [companyId: string]: CurrWorkerType[]
+};
 
 export type CompanyType = {
   id: string;
   name: string;
   count: number;
   address: string;
+  isEdit: boolean
 };
 
-const generateWorker = (): { id: string; secondName: string; name: string; post: string } => ({
+const generateWorker = (): { id: string; secondName: string; name: string; post: string; isEdit: boolean } => ({
   id: v1(),
-  secondName: 'FakeSecondName',
+  secondName: 'FakeSecondName1',
   name: 'FakeName',
   post: 'FakePost',
+  isEdit: false,
 });
 
-const generateCompany = (id: string, name: string, address: string, numWorkers: number): CompanyType => {
-  const workers = Array.from({ length: numWorkers }, () => generateWorker());
+const generateCompany = (id: string, name: string, address: string, numWorkers: number, isEdit: boolean): CompanyType => {
+  const workers = Array.from({length: numWorkers}, () => generateWorker());
   return {
     id,
     name,
     count: workers.length,
     address,
+    isEdit,
   };
 };
 
@@ -35,10 +48,6 @@ export const workers: WorkerType = {
 };
 
 export const companies: CompanyType[] = [
-  generateCompany(companyId1, 'company1', 'company1 address', workers[companyId1].length),
-  generateCompany(companyId2, 'company2', 'company2 address', workers[companyId2].length),
+  generateCompany(companyId1, 'company1', 'company1 address', workers[companyId1].length, false),
+  generateCompany(companyId2, 'company2', 'company2 address', workers[companyId2].length, false),
 ];
-
-// For testing
-console.log(workers);
-console.log(companies);
