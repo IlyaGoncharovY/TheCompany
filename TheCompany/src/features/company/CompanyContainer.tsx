@@ -1,16 +1,10 @@
+import {HeaderCompany} from './components/tableHeader/HeaderCompany.tsx';
+
 export const CompanyContainer = () => {
+
   return (
     <table>
-      <thead>
-        <tr>
-          <th>
-            <input type="checkbox" /> Выделить все
-          </th>
-          <th>Название компании</th>
-          <th>Кол-во сотрудников</th>
-          <th>Аддрес</th>
-        </tr>
-      </thead>
+      <HeaderCompany/>
       <tbody>
         <tr>
           <td>
