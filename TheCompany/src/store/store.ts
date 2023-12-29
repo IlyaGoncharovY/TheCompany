@@ -1,8 +1,10 @@
 import {Action, configureStore, ThunkAction} from '@reduxjs/toolkit';
 
+import {CompanyReducer} from '../features/company/index.ts';
+
 export const store = configureStore({
   reducer: {
-   
+    company: CompanyReducer,
   },
 });
 
