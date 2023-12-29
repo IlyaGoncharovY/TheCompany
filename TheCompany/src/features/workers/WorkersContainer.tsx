@@ -1,35 +1,19 @@
+import {useAppSelector} from '../../store/hook.ts';
+
 import {HeaderWorkers} from './components/tableHeader/HeaderWorkers.tsx';
+import {WorkersItem} from './item/WorkersItem.tsx';
 
 export const WorkersContainer = () => {
 
+  const workers = useAppSelector(state => state.workers.workers);
+  const allWorkers = Object.values(workers).flat();
   return (
     <table>
       <HeaderWorkers/>
       <tbody>
-        <tr>
-          <td>
-            <input type="checkbox" />
-          </td>
-          <td>Бобов</td>
-          <td>Боб</td>
-          <td>Рабочий</td>
-        </tr>
-        <tr>
-          <td>
-            <input type="checkbox" />
-          </td>
-          <td>Иванов</td>
-          <td>Иван</td>
-          <td>рабочий 2</td>
-        </tr>
-        <tr>
-          <td>
-            <input type="checkbox" />
-          </td>
-          <td>Сергеев</td>
-          <td>Сергей</td>
-          <td>рабочий 3</td>
-        </tr>
+        {allWorkers.map((worker) =>
+          <WorkersItem key={worker.id} worker={worker}/>,
+        )}
       </tbody>
     </table>
   );

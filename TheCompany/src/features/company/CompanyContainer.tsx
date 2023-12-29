@@ -1,35 +1,19 @@
+import {useAppSelector} from '../../store/hook.ts';
+
 import {HeaderCompany} from './components/tableHeader/HeaderCompany.tsx';
+import {CompaniesItem} from './item/CompaniesItem.tsx';
 
 export const CompanyContainer = () => {
+
+  const companies = useAppSelector(state => state.company.companies);
 
   return (
     <table>
       <HeaderCompany/>
       <tbody>
-        <tr>
-          <td>
-            <input type="checkbox" />
-          </td>
-          <td>yandex</td>
-          <td>999</td>
-          <td>street pushkina</td>
-        </tr>
-        <tr>
-          <td>
-            <input type="checkbox" />
-          </td>
-          <td>google</td>
-          <td>888</td>
-          <td>dom kalatushkina</td>
-        </tr>
-        <tr>
-          <td>
-            <input type="checkbox" />
-          </td>
-          <td>mail</td>
-          <td>777</td>
-          <td>dom zasharovny</td>
-        </tr>
+        {companies.map((company)=>
+          <CompaniesItem key={company.id} company={company}/>,
+        )}
       </tbody>
     </table>
   );
