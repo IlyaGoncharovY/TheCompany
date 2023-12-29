@@ -1,16 +1,10 @@
+import {HeaderWorkers} from './components/tableHeader/HeaderWorkers.tsx';
+
 export const WorkersContainer = () => {
+
   return (
     <table>
-      <thead>
-        <tr>
-          <th>
-            <input type="checkbox" /> Выделить всё
-          </th>
-          <th>Фамилия</th>
-          <th>Имя</th>
-          <th>Должность</th>
-        </tr>
-      </thead>
+      <HeaderWorkers/>
       <tbody>
         <tr>
           <td>
