@@ -9,7 +9,7 @@ export const CompanyContainer = () => {
 
   return (
     <table>
-      <HeaderCompany/>
+      <HeaderCompany companies={companies}/>
       <tbody>
         {companies.map((company)=>
           <CompaniesItem key={company.id} company={company}/>,

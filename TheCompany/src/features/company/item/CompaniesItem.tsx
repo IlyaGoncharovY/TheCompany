@@ -2,7 +2,7 @@ import {FC} from 'react';
 
 import {InitialCompanyTypes} from '../../../common';
 
-import {useAppDispatch} from '../../../store/hook.ts';
+import {useAppDispatch, useAppSelector} from '../../../store/hook.ts';
 import {changeStatusCompany} from '../reducer/CompanyReducer.ts';
 
 import s from './CompanyItem.module.scss';
@@ -12,6 +12,10 @@ interface ICompaniesItem {
 }
 
 export const CompaniesItem: FC<ICompaniesItem> = ({company}) => {
+
+  const workers = useAppSelector(state => state.workers.workers);
+
+  const workersCount = workers[company.id]?.length || 0;
 
   const dispatch = useAppDispatch();
   const onClickCheckHandler = (companyId: string) => dispatch(changeStatusCompany(companyId));
@@ -26,8 +30,8 @@ export const CompaniesItem: FC<ICompaniesItem> = ({company}) => {
         />
       </td>
       <td>{company.name}</td>
-      <td>{company.count}</td>
       <td>{company.address}</td>
+      <td>{workersCount}</td>
     </tr>
   );
 };

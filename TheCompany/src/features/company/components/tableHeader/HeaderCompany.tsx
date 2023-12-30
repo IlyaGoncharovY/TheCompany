@@ -1,29 +1,64 @@
-import {ChangeEvent} from 'react';
+import {ChangeEvent, FC} from 'react';
 
-import {companyTableHeader} from '../../../../common/dataSet.ts';
+import {v1} from 'uuid';
+
+import {companyTableHeader, InitialCompanyTypes} from '../../../../common';
 import {useAppDispatch} from '../../../../store/hook.ts';
-import {changeStatusAllCompany} from '../../reducer/CompanyReducer.ts';
+import {addNewCompany, changeStatusAllCompany, deleteCompany} from '../../reducer/CompanyReducer.ts';
 
-export const HeaderCompany = () => {
+interface IHeaderCompany {
+  companies: InitialCompanyTypes[]
+}
+
+export const HeaderCompany: FC<IHeaderCompany> = ({companies}) => {
 
   const dispatch = useAppDispatch();
+
+  const checkedCompanyIds = companies.filter((company) => company.isChecked)
+    .map((company) => company.id);
 
   const checkOnChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.currentTarget.checked;
     dispatch(changeStatusAllCompany(isChecked));
   };
 
+  const addNewCompanyHandler = () => {
+    const newCompany = {
+      id: v1(),
+      isChecked: false,
+      name: 'newName',
+      count: 0,
+      address: 'newAddress',
+    };
+    dispatch(addNewCompany(newCompany));
+  };
+
+  const deleteCompanyHandler = () => {
+    checkedCompanyIds.forEach((companyId) => {
+      dispatch(deleteCompany(companyId));
+    });
+  };
+
   return (
     <thead>
       <tr>
         <th>
-        Компании
+      Компании
         </th>
         <th>
-          <button>Добавить компанию</button>
+          <button
+            onClick={addNewCompanyHandler}
+          >
+            Добавить компанию
+          </button>
         </th>
         <th>
-          <button>Удалить компанию</button>
+          <button
+            onClick={deleteCompanyHandler}
+            disabled={checkedCompanyIds.length === 0}
+          >
+            Удалить компанию
+          </button>
         </th>
       </tr>
       <tr>
