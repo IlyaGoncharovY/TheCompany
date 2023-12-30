@@ -2,7 +2,7 @@ import {FC} from 'react';
 
 import {InitialCompanyTypes} from '../../../common';
 
-import {useAppDispatch, useAppSelector} from '../../../store/hook.ts';
+import {useAppDispatch, useAppSelector} from '../../../store';
 import {changeStatusCompany} from '../reducer/CompanyReducer.ts';
 
 import s from './CompanyItem.module.scss';

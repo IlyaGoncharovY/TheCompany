@@ -1,4 +1,4 @@
-import {useAppSelector} from '../../store/hook.ts';
+import {useAppSelector} from '../../store';
 
 import {WorkersItem} from './item/WorkersItem.tsx';
 import {HeaderWorkers} from './components/tableHeader/HeaderWorkers.tsx';

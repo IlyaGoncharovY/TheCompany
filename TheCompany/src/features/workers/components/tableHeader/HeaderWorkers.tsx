@@ -4,7 +4,7 @@ import {v1} from 'uuid';
 
 import {CurrWorkersType, workersTableHeader} from '../../../../common';
 import {InitialCompanyTypes} from '../../../../common';
-import {useAppDispatch} from '../../../../store/hook.ts';
+import {useAppDispatch} from '../../../../store';
 import {addNewWorker, changeWorkerAllStatus, deleteWorker} from '../../reducer/WorkersReducer.ts';
 
 interface IHeaderWorkers {
