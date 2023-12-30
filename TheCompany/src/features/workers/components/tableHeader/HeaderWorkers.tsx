@@ -6,6 +6,17 @@ export const HeaderWorkers = () => {
     <thead>
       <tr>
         <th>
+        Сотрудники
+        </th>
+        <th>
+          <button>Добавить сотрудника</button>
+        </th>
+        <th>
+          <button>Удалить сотрудника</button>
+        </th>
+      </tr>
+      <tr>
+        <th>
           <input type="checkbox" /> Выделить все
         </th>
         {workersTableHeader.map((el) =>

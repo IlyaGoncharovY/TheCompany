@@ -1,9 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-import {workers, WorkerType} from '../../../common';
+import {InitialWorkersType, workers} from '../../../common';
 
 interface initialStateType {
-    workers: WorkerType
+    workers: InitialWorkersType
 }
 
 const initialState: initialStateType = {
@@ -14,7 +14,6 @@ const WorkersReducer = createSlice({
   name: 'WorkersReducer',
   initialState,
   reducers: {
-
   },
 });
 export const {} = WorkersReducer.actions;
