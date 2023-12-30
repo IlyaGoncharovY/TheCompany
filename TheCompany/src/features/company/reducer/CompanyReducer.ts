@@ -4,7 +4,7 @@ export type InitialCompanyTypes = {
   id: string,
   isChecked: boolean
   name: string
-  count: number
+  count: number | null
   address: string
 }
 
@@ -47,6 +47,19 @@ const CompanyReducer = createSlice({
     deleteCompany: (state, action: PayloadAction<string>) => {
       state.companies = state.companies.filter((el) => el.id !== action.payload);
     },
+    editCompanyBody: (
+      state,
+      action: PayloadAction<{ companyId: string; editedName: string; editedAddress: string }>
+    ) => {
+      const { companyId, editedName, editedAddress } = action.payload;
+
+      const companyIndex = state.companies.findIndex((company) => company.id === companyId);
+
+      if (companyIndex !== -1) {
+        state.companies[companyIndex].name = editedName;
+        state.companies[companyIndex].address = editedAddress;
+      }
+    },
   },
 });
 export const {
@@ -54,6 +67,7 @@ export const {
   changeStatusAllCompany,
   addNewCompany,
   deleteCompany,
+  editCompanyBody,
 } = CompanyReducer.actions;
 
 export default CompanyReducer.reducer;
