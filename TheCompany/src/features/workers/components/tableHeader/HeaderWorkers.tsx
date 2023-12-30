@@ -2,9 +2,9 @@ import {ChangeEvent, FC} from 'react';
 
 import {v1} from 'uuid';
 
-import {CurrWorkersType, workersTableHeader} from '../../../../common';
-import {InitialCompanyTypes} from '../../../../common';
 import {useAppDispatch} from '../../../../store';
+import {InitialCompanyTypes} from '../../../../common';
+import {CurrWorkersType, workersTableHeader} from '../../../../common';
 import {addNewWorker, changeWorkerAllStatus, deleteWorker} from '../../reducer/WorkersReducer.ts';
 
 interface IHeaderWorkers {

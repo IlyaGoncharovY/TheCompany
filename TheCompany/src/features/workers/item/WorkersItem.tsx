@@ -1,7 +1,7 @@
 import {FC} from 'react';
 
-import {CurrWorkersType} from '../../../common';
 import {useAppDispatch} from '../../../store';
+import {CurrWorkersType} from '../../../common';
 import {changeWorkerStatus} from '../reducer/WorkersReducer.ts';
 
 import s from './WorkersItem.module.scss';

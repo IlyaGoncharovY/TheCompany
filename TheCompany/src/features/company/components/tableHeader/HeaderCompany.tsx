@@ -2,8 +2,8 @@ import {ChangeEvent, FC} from 'react';
 
 import {v1} from 'uuid';
 
-import {companyTableHeader, InitialCompanyTypes} from '../../../../common';
 import {useAppDispatch} from '../../../../store';
+import {companyTableHeader, InitialCompanyTypes} from '../../../../common';
 import {addNewCompany, changeStatusAllCompany, deleteCompany} from '../../reducer/CompanyReducer.ts';
 
 interface IHeaderCompany {
