@@ -1,17 +1,16 @@
-import {ChangeEvent, useState} from 'react';
+import {ChangeEvent} from 'react';
 
 import {companyTableHeader} from '../../../../common/dataSet.ts';
+import {useAppDispatch} from '../../../../store/hook.ts';
+import {changeStatusAllCompany} from '../../reducer/CompanyReducer.ts';
 
 export const HeaderCompany = () => {
 
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
   const checkOnChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(e.currentTarget.checked);
-  };
-
-  const changeStatusAllCompanyHandler = () => {
-
+    const isChecked = e.currentTarget.checked;
+    dispatch(changeStatusAllCompany(isChecked));
   };
 
   return (
@@ -31,9 +30,7 @@ export const HeaderCompany = () => {
         <th>
           <input
             type="checkbox"
-            checked={isChecked}
             onChange={checkOnChangeHandler}
-            onClick={changeStatusAllCompanyHandler}
           /> Выделить все
         </th>
         {companyTableHeader.map((el) =>

@@ -20,8 +20,14 @@ const CompanyReducer = createSlice({
           ? { ...company, isChecked: !company.isChecked } : company,
       );
     },
+    changeStatusAllCompany: (state, action: PayloadAction<boolean>) => {
+      state.companies = state.companies.map((company) => ({
+        ...company,
+        isChecked: action.payload,
+      }));
+    },
   },
 });
-export const {changeStatusCompany} = CompanyReducer.actions;
+export const {changeStatusCompany, changeStatusAllCompany} = CompanyReducer.actions;
 
 export default CompanyReducer.reducer;
