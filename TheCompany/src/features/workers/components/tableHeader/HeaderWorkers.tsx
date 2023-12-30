@@ -1,8 +1,26 @@
+import {ChangeEvent, FC} from 'react';
+
+import {InitialCompanyTypes} from '../../../../common';
+import {useAppDispatch} from '../../../../store/hook.ts';
 import {workersTableHeader} from '../../../../common/dataSet.ts';
+import {changeWorkerAllStatus} from '../../reducer/WorkersReducer.ts';
 
-export const HeaderWorkers = () => {
+interface IHeaderWorkers {
+  companies: InitialCompanyTypes[]
+}
+
+export const HeaderWorkers: FC<IHeaderWorkers> = ({companies}) => {
+
+  const dispatch = useAppDispatch();
+
+  const disabledCheck = companies.some((c) => c.isChecked);
+
+  const checkOnChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const isChecked = e.currentTarget.checked;
+    const companyIds = companies.filter((c) => c.isChecked).map((c) => c.id);
+    dispatch(changeWorkerAllStatus({isChecked, companyIds}));
+  };
   return (
-
     <thead>
       <tr>
         <th>
@@ -17,7 +35,11 @@ export const HeaderWorkers = () => {
       </tr>
       <tr>
         <th>
-          <input type="checkbox" /> Выделить все
+          <input
+            type="checkbox"
+            onChange={checkOnChangeHandler}
+            disabled={!disabledCheck}
+          /> Выделить все
         </th>
         {workersTableHeader.map((el) =>
           <th key={el.id}>

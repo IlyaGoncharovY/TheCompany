@@ -13,7 +13,7 @@ export const WorkersContainer = () => {
 
   return (
     <table>
-      <HeaderWorkers/>
+      <HeaderWorkers companies={companies}/>
       <tbody>
         {allWorkers.map((worker) => {
           const company = companies.find((c) => c.id === worker.companyId) as InitialCompanyTypes;
