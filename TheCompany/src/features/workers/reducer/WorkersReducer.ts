@@ -65,6 +65,28 @@ const WorkersReducer = createSlice({
         );
       }
     },
+    editWorkerBody: (state, action: PayloadAction<{
+      companyId: string;
+      workerId: string;
+      editedSecondName: string;
+      editedName: string;
+      editedPost: string;
+    }>) => {
+      const { companyId, workerId, editedSecondName, editedName, editedPost } = action.payload;
+
+      if (state.workers[companyId]) {
+        const workerIndex = state.workers[companyId].findIndex((worker) => worker.id === workerId);
+
+        if (workerIndex !== -1) {
+          state.workers[companyId][workerIndex] = {
+            ...state.workers[companyId][workerIndex],
+            secondName: editedSecondName,
+            name: editedName,
+            post: editedPost,
+          };
+        }
+      }
+    },
   },
 });
 
@@ -72,7 +94,8 @@ export const {
   changeWorkerStatus,
   changeWorkerAllStatus,
   addNewWorker,
-  deleteWorker
+  deleteWorker,
+  editWorkerBody,
 } = WorkersReducer.actions;
 
 export default WorkersReducer.reducer;
