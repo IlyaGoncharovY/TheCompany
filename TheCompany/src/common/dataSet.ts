@@ -5,8 +5,8 @@ type tableHeaderType = {
 
 export const companyTableHeader: tableHeaderType[] = [
   {id: 1, title: 'Название компании:'},
-  {id: 2, title: 'Кол-во сотрудников:'},
-  {id: 3, title: 'Аддрес:'},
+  {id: 2, title: 'Аддрес:'},
+  {id: 3, title: 'Кол-во сотрудников:'},
 ];
 
 export const workersTableHeader: tableHeaderType[] = [
