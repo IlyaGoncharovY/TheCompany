@@ -1,7 +1,9 @@
 import {useAppSelector} from '../../store';
 
+import {CommonContainer} from '../../common';
+
 import {WorkersItem} from './item/WorkersItem.tsx';
-import {HeaderWorkers} from './components/tableHeader/HeaderWorkers.tsx';
+import {HeaderWorkers} from './components';
 
 export const WorkersContainer = () => {
 
@@ -11,22 +13,12 @@ export const WorkersContainer = () => {
   const filteredWorkers = companies
     .filter((company) => company.isChecked)
     .flatMap((company) => workers[company.id] || []);
-  console.log(workers);
+
   return (
-    <table>
-      <HeaderWorkers companies={companies}/>
-      <tbody>
-        {/*{filteredWorkers.map((worker) => {*/}
-        {/*  const company = companies.find((c) => c.id === worker.companyId) as InitialCompanyTypes;*/}
-        {/*  if (company.isChecked) {*/}
-        {/*    return <WorkersItem key={worker.id} worker={worker} />;*/}
-        {/*  }*/}
-        {/*  return null;*/}
-        {/*})}*/}
-        {filteredWorkers.map((worker) => (
-          <WorkersItem key={worker.id} worker={worker} />
-        ))}
-      </tbody>
-    </table>
+    <CommonContainer
+      headerComponent={<HeaderWorkers companies={companies} />}
+      renderItem={(worker) => <WorkersItem key={worker.id} worker={worker} />}
+      items={filteredWorkers}
+    />
   );
 };

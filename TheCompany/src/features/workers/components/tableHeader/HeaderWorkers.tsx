@@ -1,11 +1,11 @@
-import {ChangeEvent, FC} from 'react';
+import {ChangeEvent, FC, useCallback} from 'react';
 
 import {v1} from 'uuid';
 
 import {useAppDispatch} from '../../../../store';
-import {InitialCompanyTypes} from '../../../../common';
-import {CurrWorkersType, workersTableHeader} from '../../../../common';
-import {addNewWorker, changeWorkerAllStatus, deleteWorker} from '../../reducer/WorkersReducer.ts';
+import {workersTableHeader} from '../../../../common';
+import {InitialCompanyTypes} from '../../../company/reducer/CompanyReducer.ts';
+import {addNewWorker, changeWorkerAllStatus, CurrWorkersType, deleteWorker} from '../../reducer/WorkersReducer.ts';
 
 interface IHeaderWorkers {
   companies: InitialCompanyTypes[]
@@ -22,13 +22,13 @@ export const HeaderWorkers: FC<IHeaderWorkers> = ({companies}) => {
   const selectedCompanies = companies.filter((c) => c.isChecked);
   const disabledAddWorker = selectedCompanies.length !== 1;
 
-  const checkOnChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const checkOnChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.currentTarget.checked;
     const companyIds = companies.filter((c) => c.isChecked).map((c) => c.id);
     dispatch(changeWorkerAllStatus({isChecked, companyIds}));
-  };
+  },[dispatch, companies]);
 
-  const addNewWorkerHandler = () => {
+  const addNewWorkerHandler = useCallback(() => {
     const selectedCompany = companies.find((c) => c.isChecked);
 
     if (selectedCompany) {
@@ -45,11 +45,11 @@ export const HeaderWorkers: FC<IHeaderWorkers> = ({companies}) => {
 
       dispatch(addNewWorker(newWorker));
     }
-  };
+  }, [companies, dispatch]);
 
-  const deleteWorkerHandler = () => {
+  const deleteWorkerHandler = useCallback(() => {
     dispatch(deleteWorker());
-  };
+  }, [dispatch]);
 
   return (
     <thead>
@@ -72,13 +72,14 @@ export const HeaderWorkers: FC<IHeaderWorkers> = ({companies}) => {
             Удалить сотрудника
           </button>
         </th>
+        <th></th>
       </tr>
       <tr>
         <th>
           <input
             type="checkbox"
             onChange={checkOnChangeHandler}
-            disabled={!disabledCheck}
+            disabled={!disabledCheck || disabledAddWorker}
           /> Выделить все
         </th>
         {workersTableHeader.map((el) =>
