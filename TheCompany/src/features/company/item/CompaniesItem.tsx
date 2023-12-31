@@ -1,17 +1,22 @@
-import {FC, useState} from 'react';
+import {FC, memo, useState} from 'react';
 
-import {InitialCompanyTypes} from '../../../common';
+import {useAppSelector} from '../../../store';
+import {InitialCompanyTypes} from '../reducer/CompanyReducer.ts';
 
-import {useAppDispatch, useAppSelector} from '../../../store';
-import {changeStatusCompany, editCompanyBody} from '../reducer/CompanyReducer.ts';
+import {UniversalInput} from '../../../common';
+
+import {UseCompanyHook} from '../helpers/UseCompanyHook.ts';
+
+import {InputBlock} from '../components';
 
 import s from './CompanyItem.module.scss';
 
+
 interface ICompaniesItem {
-  company: InitialCompanyTypes
+  company: InitialCompanyTypes;
 }
 
-export const CompaniesItem: FC<ICompaniesItem> = ({company}) => {
+export const CompaniesItem: FC<ICompaniesItem> = memo(({company}) => {
 
   const workers = useAppSelector(state => state.workers.workers);
 
@@ -21,64 +26,34 @@ export const CompaniesItem: FC<ICompaniesItem> = ({company}) => {
 
   const workersCount = workers[company.id]?.length || 0;
 
-  const dispatch = useAppDispatch();
-  const onClickCheckHandler = (companyId: string) => dispatch(changeStatusCompany(companyId));
+  const {
+    onDoubleClickHandler,
+    onChangeCheckHandler,
+    onKeyDownHandler,
+  } = UseCompanyHook(company, setIsEditing, editedName, editedAddress);
 
-  const onDoubleClickHandler = () => {
-    setIsEditing(true);
-  };
-
-  const onSaveHandler = () => {
-    dispatch(editCompanyBody({ companyId: company.id, editedName, editedAddress }));
-    setIsEditing(false);
-  };
-
-  const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      onSaveHandler();
-    }
-  };
-
-  console.log(company);
   return (
     <tr
-      className={`${company.isChecked ? s.editCompany : ''}`}
+      className={company.isChecked ? s.editCompany : ''}
       onDoubleClick={onDoubleClickHandler}
     >
       <td>
-        <input
-          type="checkbox"
-          checked={company.isChecked}
-          onClick={() => onClickCheckHandler(company.id)}
+        <UniversalInput
+          type={'checkbox'}
+          isChecked={company.isChecked}
+          onChange={onChangeCheckHandler}
         />
       </td>
-      {/*<td>{company.name}</td>*/}
-      {/*<td>{company.address}</td>*/}
-      <td>
-        {isEditing ? (
-          <input
-            type="text"
-            value={editedName}
-            onChange={(e) => setEditedName(e.target.value)}
-            onKeyDown={onKeyDownHandler}
-          />
-        ) : (
-          company.name
-        )}
-      </td>
-      <td>
-        {isEditing ? (
-          <input
-            type="text"
-            value={editedAddress}
-            onChange={(e) => setEditedAddress(e.target.value)}
-            onKeyDown={onKeyDownHandler}
-          />
-        ) : (
-          company.address
-        )}
-      </td>
+      <InputBlock
+        isEditing={isEditing}
+        editedName={editedName}
+        setEditedName={setEditedName}
+        onKeyDownHandler={onKeyDownHandler}
+        company={company}
+        editedAddress={editedAddress}
+        setEditedAddress={setEditedAddress}
+      />
       <td>{workersCount}</td>
     </tr>
   );
-};
+});
