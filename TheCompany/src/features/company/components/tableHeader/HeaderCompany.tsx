@@ -3,13 +3,14 @@ import {ChangeEvent, FC, useCallback} from 'react';
 import {v1} from 'uuid';
 
 import {useAppDispatch} from '../../../../store';
-import {companyTableHeader} from '../../../../common';
 import {
   addNewCompany,
   changeStatusAllCompany,
   deleteCompany,
   InitialCompanyTypes,
 } from '../../reducer/CompanyReducer.ts';
+import {CommonHeader} from '../../../../common';
+import {companyTableHeader} from '../../../../common';
 
 interface IHeaderCompany {
   companies: InitialCompanyTypes[]
@@ -45,41 +46,13 @@ export const HeaderCompany: FC<IHeaderCompany> = ({companies}) => {
   }, [checkedCompanyIds, dispatch]);
 
   return (
-    <thead>
-      <tr>
-        <th>
-      Компании
-        </th>
-        <th>
-          <button
-            onClick={addNewCompanyHandler}
-          >
-            Добавить компанию
-          </button>
-        </th>
-        <th>
-          <button
-            onClick={deleteCompanyHandler}
-            disabled={checkedCompanyIds.length === 0}
-          >
-            Удалить компанию
-          </button>
-        </th>
-        <th></th>
-      </tr>
-      <tr>
-        <th>
-          <input
-            type="checkbox"
-            onChange={checkOnChangeHandler}
-          /> Выделить все
-        </th>
-        {companyTableHeader.map((el) =>
-          <th key={el.id}>
-            {el.title}
-          </th>,
-        )}
-      </tr>
-    </thead>
+    <CommonHeader
+      items={companies}
+      checkOnChangeHandler={checkOnChangeHandler}
+      addNewItemHandler={addNewCompanyHandler}
+      deleteItemHandler={deleteCompanyHandler}
+      dataForTable={companyTableHeader}
+      itemName="Компании"
+    />
   );
 };

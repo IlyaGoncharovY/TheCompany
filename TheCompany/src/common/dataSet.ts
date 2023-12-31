@@ -1,4 +1,4 @@
-type tableHeaderType = {
+export type tableHeaderType = {
     id: number,
     title: string
 }

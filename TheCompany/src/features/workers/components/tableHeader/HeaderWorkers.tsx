@@ -3,15 +3,16 @@ import {ChangeEvent, FC, useCallback} from 'react';
 import {v1} from 'uuid';
 
 import {useAppDispatch} from '../../../../store';
-import {workersTableHeader} from '../../../../common';
 import {InitialCompanyTypes} from '../../../company/reducer/CompanyReducer.ts';
 import {addNewWorker, changeWorkerAllStatus, CurrWorkersType, deleteWorker} from '../../reducer/WorkersReducer.ts';
+import {CommonHeader} from '../../../../common';
+import {workersTableHeader} from '../../../../common';
 
 interface IHeaderWorkers {
-  companies: InitialCompanyTypes[]
+  companies: InitialCompanyTypes[];
 }
 
-export type WorkerType = {[key: string]: CurrWorkersType}
+export type WorkerType = { [key: string]: CurrWorkersType }
 
 export const HeaderWorkers: FC<IHeaderWorkers> = ({companies}) => {
 
@@ -26,7 +27,7 @@ export const HeaderWorkers: FC<IHeaderWorkers> = ({companies}) => {
     const isChecked = e.currentTarget.checked;
     const companyIds = companies.filter((c) => c.isChecked).map((c) => c.id);
     dispatch(changeWorkerAllStatus({isChecked, companyIds}));
-  },[dispatch, companies]);
+  }, [dispatch, companies]);
 
   const addNewWorkerHandler = useCallback(() => {
     const selectedCompany = companies.find((c) => c.isChecked);
@@ -52,42 +53,15 @@ export const HeaderWorkers: FC<IHeaderWorkers> = ({companies}) => {
   }, [dispatch]);
 
   return (
-    <thead>
-      <tr>
-        <th>
-        Сотрудники
-        </th>
-        <th>
-          <button
-            onClick={addNewWorkerHandler}
-            disabled={!disabledCheck || disabledAddWorker}
-          >
-            Добавить сотрудника
-          </button>
-        </th>
-        <th>
-          <button
-            onClick={deleteWorkerHandler}
-          >
-            Удалить сотрудника
-          </button>
-        </th>
-        <th></th>
-      </tr>
-      <tr>
-        <th>
-          <input
-            type="checkbox"
-            onChange={checkOnChangeHandler}
-            disabled={!disabledCheck || disabledAddWorker}
-          /> Выделить все
-        </th>
-        {workersTableHeader.map((el) =>
-          <th key={el.id}>
-            {el.title}
-          </th>,
-        )}
-      </tr>
-    </thead>
+    <CommonHeader
+      items={companies}
+      disabledCheck={!disabledCheck}
+      checkOnChangeHandler={checkOnChangeHandler}
+      addNewItemHandler={addNewWorkerHandler}
+      deleteItemHandler={deleteWorkerHandler}
+      disabledAddItem={disabledAddWorker}
+      dataForTable={workersTableHeader}
+      itemName="Сотрудники"
+    />
   );
 };
