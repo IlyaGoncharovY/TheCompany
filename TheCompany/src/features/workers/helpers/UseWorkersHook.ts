@@ -1,6 +1,18 @@
 import {useAppDispatch} from '../../../store';
 import {changeWorkerStatus, CurrWorkersType, editWorkerBody} from '../reducer/WorkersReducer.ts';
 
+/**
+ * custom hook for @workers
+ * @param worker
+ * @param setIsEditing
+ * @param editedSecondName
+ * @param editedName
+ * @param editedPost
+ * @constructor
+ * @return onDoubleClickHandler
+ * @return onChangeCheckHandler
+ * @return onKeyDownHandler
+ */
 export const UseWorkersHook = (
   worker: CurrWorkersType,
   setIsEditing: (value: boolean) => void,

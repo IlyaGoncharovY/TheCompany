@@ -9,6 +9,16 @@ interface IUniversalInput {
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
+/**
+ * component UniversalInput
+ * @param type
+ * @param isChecked
+ * @param onChange
+ * @param onChangeEdit
+ * @param value
+ * @param onKeyDown
+ * @constructor
+ */
 export const UniversalInput: FC<IUniversalInput> = ({
   type,
   isChecked,

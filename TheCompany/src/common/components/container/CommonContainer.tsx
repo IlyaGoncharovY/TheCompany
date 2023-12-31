@@ -8,6 +8,13 @@ interface CommonContainerProps {
   items: any[];
 }
 
+/**
+ * container component for infinity scroll
+ * @param headerComponent
+ * @param renderItem
+ * @param items
+ * @constructor
+ */
 export const CommonContainer: FC<CommonContainerProps> = ({ headerComponent, renderItem, items }) => {
   const anchorRef = useRef<HTMLDivElement>(null);
   const [autoScrollActive, setAutoScrollActive] = useState<boolean>(true);

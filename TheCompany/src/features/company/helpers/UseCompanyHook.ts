@@ -1,6 +1,18 @@
 import {useAppDispatch} from '../../../store';
 import {changeStatusCompany, editCompanyBody, InitialCompanyTypes} from '../reducer/CompanyReducer.ts';
 
+/**
+ * custom hook for @companies
+ * @param company
+ * @param setIsEditing
+ * @param editedName
+ * @param editedAddress
+ * @constructor
+ * @return onDoubleClickHandler
+ * @return onChangeCheckHandler
+ * @return onKeyDownHandler
+ */
+
 export const UseCompanyHook = (
   company: InitialCompanyTypes,
   setIsEditing: (value: boolean) => void,
