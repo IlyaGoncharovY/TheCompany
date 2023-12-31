@@ -2,3 +2,33 @@
   display: flex;
   justify-content: space-between;
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    border: 2px solid #ea7f7f;
+
+    tr {
+      position: sticky;
+      top: 0;
+      background-color: #f3c48a;
+      z-index: 1;
+    }
+  }
+
+  tbody {
+    border: 2px solid #7f88ea;
+
+    tr {
+      &:nth-child(even) {
+        background-color: #e0e0e0;
+      }
+
+      &:nth-child(odd) {
+        background-color: #f0f0f0;
+      }
+    }
+  }
+}
