@@ -14,6 +14,19 @@ interface ICommonHeader<T> {
   itemName: string;
   dataForTable: tableHeaderType[]
 }
+
+/**
+ * common component for header workers and companies
+ * @param items
+ * @param checkOnChangeHandler
+ * @param addNewItemHandler
+ * @param deleteItemHandler
+ * @param disabledCheck
+ * @param disabledAddItem
+ * @param itemName
+ * @param dataForTable
+ * @constructor
+ */
 export const CommonHeader:FC<ICommonHeader<any>> = ({
   items,
   checkOnChangeHandler,
