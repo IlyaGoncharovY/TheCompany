@@ -9,10 +9,10 @@ table {
 
   thead {
     border: 2px solid #ea7f7f;
-
+    position: sticky;
+    top: 0;
+    height: 80px;
     tr {
-      position: sticky;
-      top: 0;
       background-color: #f3c48a;
       z-index: 1;
     }

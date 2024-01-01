@@ -29,7 +29,7 @@ export const CommonContainer: FC<CommonContainerProps> = ({ headerComponent, ren
   };
 
   useEffect(() => {
-    if (autoScrollActive) {
+    if (!autoScrollActive) {
       anchorRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
     return () => {
@@ -45,9 +45,9 @@ export const CommonContainer: FC<CommonContainerProps> = ({ headerComponent, ren
           {items.map((item) => (
             <React.Fragment key={item.id}>{renderItem(item)}</React.Fragment>
           ))}
-          <div ref={anchorRef} />
         </tbody>
       </table>
+      <div ref={anchorRef} />
     </div>
   );
 };
