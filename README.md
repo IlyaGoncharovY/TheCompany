@@ -5,3 +5,8 @@
 # Инструкция по эксплуатации 
 * editMode === double click
 * saveState === 'Enter'
+# Docker
+1) docker pull ilyagoncharovdev/thecompany:latest
+2)  docker run -p 5173:5173 ilyagoncharovdev/thecompany
+======
+3) docker image rm ilyagoncharovdev/thecompany 
